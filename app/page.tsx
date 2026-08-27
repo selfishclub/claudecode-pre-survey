@@ -6,7 +6,7 @@ import { SCRIPT_URL } from "@/lib/config";
 /* ── 체크 항목 정의 ── */
 const STEP1_CHECKS = [
   { id: "s1_1", label: "claude.ai 접속 후 계정 생성(또는 로그인) 완료" },
-  { id: "s1_2", label: "요금제 확인 — Max 플랜 구독 완료" },
+  { id: "s1_2", label: "요금제 확인 — Pro 플랜 이상 구독 완료" },
 ];
 const STEP2_CHECKS = [
   { id: "s2_1", label: "다운로드 페이지에서 Mac 버전 다운로드" },
@@ -188,11 +188,11 @@ export default function GuidePage() {
             <p className="text-[13px] text-neutral-500 mb-5">공통 · 약 5분</p>
 
             <div className="space-y-3 text-[15px] text-neutral-700 mb-5">
-              <p><a href="https://claude.ai" target="_blank" rel="noopener noreferrer" className="font-semibold underline decoration-pop decoration-2 underline-offset-4">claude.ai</a>에 접속해서 계정을 만들고(또는 로그인) <strong>Max 플랜</strong>으로 구독하세요.</p>
+              <p><a href="https://claude.ai" target="_blank" rel="noopener noreferrer" className="font-semibold underline decoration-pop decoration-2 underline-offset-4">claude.ai</a>에 접속해서 계정을 만들고(또는 로그인) <strong>Pro 플랜 이상</strong>으로 구독하세요.</p>
               <div className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-[14px] text-amber-900">
-                <p className="font-bold">⚠️ Max 플랜 필수!</p>
-                <p className="mt-1">클로드 코드는 Max 플랜에서만 원활하게 사용 가능합니다. Pro 이하에서는 사용량 한도에 걸려 작업이 중단될 수 있어요.</p>
-                <p className="mt-1 text-[13px] text-amber-700">💡 이번 달만 Max로 올리고 다음 달에 낮추는 분들도 많습니다.</p>
+                <p className="font-bold">⚠️ Pro 플랜 이상 권장!</p>
+                <p className="mt-1">클로드 코드는 Pro 플랜 이상에서 사용 가능합니다. 무료 계정으로는 로그인 자체가 불가능해요. 사용량이 많다면 Max 플랜을 추천합니다.</p>
+                <p className="mt-1 text-[13px] text-amber-700">💡 이번 달만 올리고 다음 달에 낮추는 분들도 많습니다.</p>
               </div>
             </div>
 
@@ -205,7 +205,8 @@ export default function GuidePage() {
 
           {/* ── OS 선택 ── */}
           <section className="rounded-2xl border border-white/10 bg-white p-6">
-            <h2 className="text-xl font-extrabold text-neutral-900 mb-4">💻 사용하시는 컴퓨터를 선택하세요</h2>
+            <h2 className="text-xl font-extrabold text-neutral-900 mb-1">💻 사용하시는 컴퓨터를 선택하세요</h2>
+            <p className="text-[13.5px] text-neutral-500 mb-4">클릭하면 운영체제에 맞는 상세 설치 가이드가 나옵니다.</p>
             <div className="flex gap-3">
               <button
                 onClick={() => setOs("mac")}
@@ -403,7 +404,7 @@ export default function GuidePage() {
               a="Mac에서 Xcode Command Line Tools 설치 시 정상적으로 물어봅니다. 글자가 안 보여도 입력되고 있으니 그대로 치고 Enter를 누르세요."
             />
             <Faq
-              q="꼭 Max 플랜이어야 하나요?"
+              q="꼭 유료 플랜이어야 하나요?"
               a="네, 권장합니다. 교육 중 사용량 한도에 도달할 수 있어요. 이번 달만 Max로 올리고 다음 달에 낮추는 분들도 많습니다."
             />
             <Faq
