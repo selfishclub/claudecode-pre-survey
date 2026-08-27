@@ -391,8 +391,8 @@ export default function GuidePage() {
           <section className="space-y-3">
             <h2 className="text-lg font-extrabold text-neutral-200 mb-2">❓ 자주 묻는 질문</h2>
             <Faq
-              q="\"Git 설치\" 창이 떴어요. 잘못한 건가요?"
-              a="정상입니다! Windows에서 클로드 코드 첫 실행 시 대부분 표시돼요. \"Git 다운로드\" 클릭 후 설치하고 앱을 재실행하면 됩니다."
+              q={`"Git 설치" 창이 떴어요. 잘못한 건가요?`}
+              a={`정상입니다! Windows에서 클로드 코드 첫 실행 시 대부분 표시돼요. "Git 다운로드" 클릭 후 설치하고 앱을 재실행하면 됩니다.`}
             />
             <Faq
               q="설치했는데 Claude Code 화면이 안 열려요"
