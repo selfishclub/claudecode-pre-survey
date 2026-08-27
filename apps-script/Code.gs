@@ -1,8 +1,8 @@
 /**
- * 고객의눈 사전 서베이 + 온보딩 — Google Apps Script 웹앱 백엔드
+ * 고객의눈 — Claude Code 설치 가이드 제출 데이터 수집
  *
  * 배포 방법:
- *  1) 고객의눈 전용 Google 스프레드시트 생성
+ *  1) Google 스프레드시트 생성
  *  2) 확장 프로그램 → Apps Script → 이 코드 붙여넣기
  *  3) 배포 → 새 배포 → 유형: 웹 앱
  *     - 실행: 나
@@ -10,39 +10,28 @@
  *  4) 생성된 /exec URL 복사 → 프론트엔드 lib/config.ts 의 SCRIPT_URL 에 붙여넣기
  *
  * 시트 탭:
- *   - "응답" — 사전 서베이 제출 데이터
- *   - "온보딩" — 온보딩 체크리스트 제출 데이터
+ *   - "응답" — 준비 완료 제출 데이터
  */
 
-var SURVEY_SHEET = "응답";
-var ONBOARDING_SHEET = "온보딩";
+var SHEET_NAME = "응답";
 
-var SURVEY_HEADERS = [
-  "timestamp", "본명", "이메일", "연락처", "연령대", "GitHub이메일",
-  "현재하는일", "카테고리", "준비상태", "비즈니스상태", "도메인",
-  "나눌수있는것", "궁금한분야", "만나고싶은사람", "인스타그램", "스레드", "링크드인", "블로그",
-  "동의_멤버약속", "동의_이용약관", "동의_콘텐츠활용",
-  "AI사용경험", "바이브코딩", "Claude사용", "막힌부분",
-  "시간확보", "포기할것", "불참일정", "불참사유", "오프라인참여", "지역",
-  "부조장지원", "부조장이유",
-  "기억되고싶은모습", "집중영역", "다짐"
-];
-
-var ONBOARDING_HEADERS = [
-  "timestamp", "본명", "닉네임", "이메일",
-  "슬랙 데스크탑 + 모바일 모두 설치",
-  "워크스페이스에 입장 완료",
-  "이름을 닉네임(본명) 형식으로 설정",
-  "#00-공통-인사해요-sns친구해요 채널에 자기소개 남김",
-  "깃허브 계정 생성 및 초대 수락",
-  "클로드 데스크탑 앱 설치",
-  "구독 계정으로 로그인",
-  "클로드 코드 실행 확인",
-  "VS Code 설치 + 확장 2개 설치",
-  "VS Code에서 Claude Code 확장 설치 완료",
-  "클로드코드로 사이트부터 어드민 깃허브까지 1 시청",
-  "클로드코드로 사이트부터 어드민 깃허브까지 2 시청",
-  "이기적공유회 — 비즈니스 코어 만들기 시청"
+var HEADERS = [
+  "timestamp",
+  "성함",
+  "OS",
+  "claude.ai 접속 후 계정 생성(또는 로그인) 완료",
+  "요금제 확인 — Max 플랜 구독 완료",
+  "다운로드 페이지에서 Mac 버전 다운로드",
+  "파일 열고 Claude 아이콘을 응용 프로그램 폴더로 드래그",
+  "앱 실행 후 계정 로그인",
+  "앱 안에서 Claude Code 메뉴 확인",
+  "설치 안내창이 뜨면 \"설치\" 버튼 승인",
+  "다운로드 페이지에서 Windows 버전 클로드 앱 설치",
+  "Git for Windows 설치 (모든 선택지 기본값 Next)",
+  "클로드 앱 완전히 종료 후 재실행",
+  "Claude Code 메뉴에서 \"Git 설치\" 안내가 사라진 것 확인",
+  "github.com에서 가입 완료 (구글 계정 로그인 권장)",
+  "vercel.com에서 \"Continue with GitHub\"로 가입 완료"
 ];
 
 function getOrCreateSheet(ss, name, headers) {
@@ -59,31 +48,17 @@ function doPost(e) {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var data = JSON.parse(e.postData.contents);
+    var sheet = getOrCreateSheet(ss, SHEET_NAME, HEADERS);
 
-    // 온보딩 제출
-    if (data.type === "onboarding") {
-      var obSheet = getOrCreateSheet(ss, ONBOARDING_SHEET, ONBOARDING_HEADERS);
-      var obRow = ONBOARDING_HEADERS.map(function (h) {
-        if (h === "timestamp") return new Date();
-        var v = data[h];
-        return v == null ? "" : v;
-      });
-      obSheet.appendRow(obRow);
-      return ContentService.createTextOutput(
-        JSON.stringify({ result: "success", sheet: "onboarding" })
-      ).setMimeType(ContentService.MimeType.JSON);
-    }
-
-    // 사전 서베이 제출
-    var sheet = getOrCreateSheet(ss, SURVEY_SHEET, SURVEY_HEADERS);
-    var row = SURVEY_HEADERS.map(function (h) {
+    var row = HEADERS.map(function (h) {
       if (h === "timestamp") return new Date();
       var v = data[h];
-      return Array.isArray(v) ? v.join(", ") : v == null ? "" : v;
+      return v == null ? "" : v;
     });
     sheet.appendRow(row);
+
     return ContentService.createTextOutput(
-      JSON.stringify({ result: "success", sheet: "survey" })
+      JSON.stringify({ result: "success" })
     ).setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
     return ContentService.createTextOutput(
@@ -109,7 +84,7 @@ function doGet(e) {
   }
 
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName(SURVEY_SHEET);
+  var sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet || sheet.getLastRow() < 2)
     return out({ result: "success", rows: [] });
 

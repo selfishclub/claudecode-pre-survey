@@ -1,7 +1,7 @@
 // ── 고객의눈 사전 서베이 설정 ──
 
-// TODO: 고객의눈 전용 Google Apps Script 웹앱 URL로 교체
-export const SCRIPT_URL = "";
+export const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbzzGgXaUDuj9mGnA2HdlEj4FdV2FkJpv6SL38KZcouaVSC64jQWo3DKotDeuk2qU-9f/exec";
 
 export const LINKS = {
   memberPromise: "",
