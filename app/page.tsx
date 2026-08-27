@@ -358,7 +358,7 @@ export default function GuidePage() {
             <section className="rounded-2xl border-2 border-pop bg-pop/10 p-6">
               <h2 className="text-xl font-extrabold text-pop mb-4">✅ 준비 완료 제출</h2>
               <div className="mb-4">
-                <label className="mb-1.5 block text-[14px] font-bold text-neutral-900">
+                <label className="mb-1.5 block text-[14px] font-bold text-white">
                   성함 <span className="text-red-500">*</span>
                 </label>
                 <input
