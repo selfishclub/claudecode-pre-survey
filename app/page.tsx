@@ -57,12 +57,12 @@ function Check({ checked, onChange, label }: { checked: boolean; onChange: () =>
 function Faq({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="rounded-xl border border-neutral-200 overflow-hidden">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-4 py-3 text-left bg-neutral-50 hover:bg-neutral-100 transition">
-        <span className="font-bold text-[14.5px] text-neutral-900">{q}</span>
+    <div className="rounded-xl border border-white/20 overflow-hidden">
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-4 py-3 text-left bg-white/10 hover:bg-white/15 transition">
+        <span className="font-bold text-[14.5px] text-white">{q}</span>
         <span className="text-neutral-400 text-lg">{open ? "−" : "+"}</span>
       </button>
-      {open && <div className="px-4 py-3 text-[14px] text-neutral-700 leading-relaxed border-t border-neutral-200">{a}</div>}
+      {open && <div className="px-4 py-3 text-[14px] text-neutral-300 leading-relaxed border-t border-white/20">{a}</div>}
     </div>
   );
 }
