@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+/* Pretendard Variable는 app/layout.tsx 의 <link>로 로드 (CDN 실패 시 시스템 폰트 폴백) */
+
+/* ── AAA Selfmarketing Design System 토큰 (다크 테마) ── */
+@theme {
+  --color-ink: #f4f4f5; /* 기본 텍스트 (밝게) */
+  --color-paper: #0a0a0a; /* 페이지 배경 (블랙) */
+  --color-surface: #18181b; /* 카드·인풋 표면 */
+  --color-pop: #e9ed12; /* 포인트 옐로우 */
+  --color-muted: #a1a1aa; /* 보조 텍스트 */
+  --color-line: #2a2a2d; /* 테두리 */
+
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Malgun Gothic",
+    sans-serif;
+
+  --radius-card: 1rem;
+}
+
+/* 다크 모드 고정 */
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  background: var(--color-paper);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* 진행률 바 부드러운 전환 */
+.progress-fill {
+  transition: width 0.35s ease;
+}
+
+/* 필수 미작성 항목으로 스크롤 시 상단 진행바에 가리지 않게 */
+.field-error {
+  scroll-margin-top: 80px;
+}
