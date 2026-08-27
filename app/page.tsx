@@ -165,10 +165,10 @@ export default function GuidePage() {
         {/* ── 꿀팁 ── */}
         <section className="mb-10 rounded-2xl border-2 border-pop bg-pop/10 p-5">
           <h2 className="text-lg font-extrabold text-pop mb-3">💡 가장 중요한 꿀팁</h2>
-          <p className="text-[15px] text-neutral-700 leading-relaxed mb-3">
+          <p className="text-[15px] text-white leading-relaxed mb-3">
             막히면? <strong>화면을 캡처해서 클로드에 붙여넣기!</strong>
           </p>
-          <div className="space-y-1 text-[13.5px] text-neutral-600 mb-4">
+          <div className="space-y-1 text-[13.5px] text-neutral-200 mb-4">
             <p>🍎 Mac: <strong>Shift + Command + 4</strong></p>
             <p>🪟 Windows: <strong>Windows키 + Shift + S</strong></p>
           </div>
